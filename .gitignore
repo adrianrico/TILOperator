@@ -31,3 +31,8 @@ playwright/.cache
 
 # graphify local knowledge graph (regenerate with /graphify)
 graphify-out
+
+# Env files
+.env
+.env.*
+!.env.example
