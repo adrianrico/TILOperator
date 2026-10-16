@@ -40,7 +40,7 @@ const MANEUVER = {
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(([curp, operator]) => {
-    localStorage.setItem('til_operator_curp', curp)
+    localStorage.setItem('til_operator_token', 'test-token')
     localStorage.setItem('til_operator_data', JSON.stringify(operator))
   }, [CURP, { operator_id: CURP, operator_name: 'JUAN OPERADOR', transporter_id: 'TR001', transporter_name: 'TRANSPORTES DEMO' }])
 
@@ -76,7 +76,7 @@ test('actualizar ubicación/evento/subevento de una maniobra asignada', async ({
   await expect(page.getByText('CONT001')).toBeVisible()
 
   // Selecciona el punto de ubicación "ORIGEN" en el Steps...
-  await page.getByText('ORIGEN', { exact: true }).click()
+  await page.locator('.ant-steps-item-title').getByText('ORIGEN', { exact: true }).click()
 
   // Selecciona el evento "CARGA" en el Timeline...
   await page.getByText('CARGA', { exact: true }).click()

@@ -1,16 +1,54 @@
-# React + Vite
+# TIL OPERATOR
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+App web (móvil y escritorio) para que los operadores de transporte consulten sus maniobras asignadas y reporten su ubicación y estatus en cada punto de la ruta.
 
-Currently, two official plugins are available:
+- **Stack:** React 19 · Vite · Ant Design 6 · React Router 7 · TanStack Query 5 · Axios
+- **Calidad:** Oxlint · Playwright (E2E)
+- **Deploy:** Render (sitio estático, ver `render.yaml`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Inicio rápido
 
-## React Compiler
+```bash
+npm install
+cp .env.example .env.development   # define VITE_API_URL (backend)
+npm run dev                        # http://localhost:5173
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Script | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con HMR |
+| `npm run build` | Build de producción en `dist/` |
+| `npm run preview` | Sirve el build localmente |
+| `npm run lint` | Oxlint |
+| `npm test` | Tests E2E (Playwright, API simulada) |
 
-## Expanding the Oxlint configuration
+## Arquitectura (por features)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```
+src/
+├─ main.jsx                  entrada: monta React + tema Ant Design
+├─ app/                      composición global
+│  ├─ App.jsx                providers + tabla de rutas (lazy)
+│  ├─ AppLayout.jsx          header + contenedor de páginas autenticadas
+│  ├─ queryClient.js         config de React Query
+│  └─ theme.js               tema/idioma de Ant Design
+├─ features/                 una carpeta por dominio de negocio
+│  ├─ auth/                  login con CURP, sesión, ruta protegida
+│  ├─ maniobras/             lista, countdown, hook useMyManiobras
+│  └─ seguimiento/           stepper de ruta, eventos, guardado de estatus
+└─ shared/                   código sin lógica de negocio, reutilizable
+   ├─ api/client.js          instancia axios + header X-Operator-Curp
+   ├─ components/            TILLogo, GlobalLoader, WaveBackground
+   ├─ lib/                   toast, backendMessage, storage keys
+   └─ styles/index.css       estilos globales y overrides de antd
+```
+
+Regla de dependencias: `app → features → shared`. Un feature puede importar de `shared` (y de otro feature solo cuando comparte datos, p. ej. `seguimiento` usa `maniobras`); `shared` nunca importa de `features`.
+
+## Sesión
+
+No hay token: el operador se identifica con su CURP (`POST /auth/login`), que se guarda en `localStorage` y se envía en el header `X-Operator-Curp` en cada request.
+
+## Documentación de aprendizaje
+
+Guía paso a paso para construir un proyecto igual desde cero: [`docs/GUIA_APRENDIZAJE.md`](docs/GUIA_APRENDIZAJE.md).

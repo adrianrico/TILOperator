@@ -1,0 +1,252 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #010d1a;
+  background-image:
+    radial-gradient(ellipse at 10% 15%, rgba(6, 89, 186, 0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 85%, rgba(6, 149, 228, 0.38) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 8%,  rgba(0, 180, 255, 0.22) 0%, transparent 40%),
+    radial-gradient(ellipse at 18% 92%, rgba(0, 60, 140, 0.3)  0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: rgba(0, 14, 35, 0.3); }
+::-webkit-scrollbar-thumb    { background: rgba(6, 149, 228, 0.35); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(6, 149, 228, 0.6); }
+
+/* ─── Ant Design – Table ─────────────────────────────────────────── */
+.ant-table-wrapper .ant-table {
+  background: transparent !important;
+}
+.ant-table-wrapper .ant-table-container {
+  background: rgba(3, 51, 112, 0.35) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 10px !important;
+  border: none !important;
+  overflow: hidden;
+}
+.ant-table-wrapper .ant-table-thead .ant-table-cell {
+  background: rgba(6, 149, 228, 0.09) !important;
+  border-bottom: 1px solid rgba(6, 149, 228, 0.22) !important;
+  color: #e8f4ff !important;
+}
+.ant-table-wrapper .ant-table-tbody .ant-table-cell {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(10, 48, 80, 0.3) !important;
+}
+.ant-table-wrapper .ant-table-tbody .ant-table-row:hover .ant-table-cell {
+  background: rgba(6, 149, 228, 0.07) !important;
+}
+.ant-table-wrapper .ant-table-placeholder {
+  background: transparent !important;
+}
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+  margin-top: 16px;
+}
+
+/* ─── Ant Design – Input ─────────────────────────────────────────── */
+.ant-input-affix-wrapper {
+  background: rgba(3, 51, 112, 0.45) !important;
+  border-color: rgba(6, 149, 228, 0.25) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.ant-input-affix-wrapper:hover {
+  border-color: rgba(6, 149, 228, 0.5) !important;
+}
+.ant-input-affix-wrapper-focused,
+.ant-input-affix-wrapper:focus-within {
+  border-color: rgba(6, 149, 228, 0.75) !important;
+  box-shadow: 0 0 0 2px rgba(6, 149, 228, 0.12) !important;
+}
+.ant-input {
+  background: transparent !important;
+}
+.ant-input-clear-icon {
+  color: rgba(6, 149, 228, 0.55) !important;
+}
+.ant-input-clear-icon:hover {
+  color: rgba(6, 149, 228, 0.9) !important;
+}
+
+/* Standalone input (sin affix-wrapper) */
+.ant-input:not(.ant-input-affix-wrapper > .ant-input) {
+  background: rgba(3, 51, 112, 0.45) !important;
+  border-color: rgba(6, 149, 228, 0.25) !important;
+}
+
+/* ─── Ant Design – Button (default variant) ──────────────────────── */
+.ant-btn-default {
+  background: rgba(3, 51, 112, 0.5) !important;
+  border-color: rgba(6, 149, 228, 0.3) !important;
+}
+.ant-btn-default:hover {
+  background: rgba(6, 149, 228, 0.1) !important;
+  border-color: rgba(6, 149, 228, 0.6) !important;
+}
+
+/* ─── Ant Design – Notification (Toast) ──────────────────────────── */
+.ant-notification {
+  z-index: 1080;
+}
+.maylob-toast.ant-notification-notice {
+  background: rgba(3, 51, 112, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  max-width: min(384px, calc(100vw - 24px));
+}
+.maylob-toast .ant-notification-notice-title {
+  color: #fff !important;
+}
+.maylob-toast .ant-notification-notice-description {
+  color: #fff !important;
+}
+.maylob-toast .ant-notification-notice-icon-success { color: #22c55e !important; }
+.maylob-toast .ant-notification-notice-icon-error   { color: #f87171 !important; }
+.maylob-toast .ant-notification-notice-close {
+  color: #fff !important;
+}
+.maylob-toast .ant-notification-notice-close:hover {
+  color: #fff !important;
+}
+
+/* Responsive: toasts stretch edge-to-edge (with margin) on small screens
+   instead of clipping/overflowing the fixed 384px antd default. */
+@media (max-width: 575px) {
+  .ant-notification {
+    width: 100% !important;
+    max-width: 100% !important;
+    inset-inline: 0 !important;
+    transform: none !important;
+    padding-inline: 12px !important;
+  }
+  .ant-notification .ant-notification-notice-wrapper {
+    width: 100% !important;
+  }
+  .maylob-toast.ant-notification-notice {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-inline: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* ─── Ant Design – Alert ─────────────────────────────────────────── */
+.ant-alert {
+  background: rgba(3, 51, 112, 0.45) !important;
+  backdrop-filter: blur(8px);
+  border: none !important;
+}
+
+/* ─── Ant Design – Card ───────────────────────────── */
+.ant-card {
+  background: rgba(3, 51, 112, 0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: none !important;
+}
+
+/* ─── Ant Design – Steps / Timeline (pantalla de seguimiento) ───────── */
+.ant-steps-item-title {
+  color: #c9d8e8 !important;
+}
+.ant-steps-item-icon {
+  background: rgba(3, 51, 112, 0.6) !important;
+  border-color: rgba(6, 149, 228, 0.4) !important;
+}
+.ant-timeline-item-tail {
+  border-inline-start: 2px solid rgba(6, 149, 228, 0.22) !important;
+}
+
+/* ─── Animated wave background ──────────────────────────────────── */
+@keyframes wave-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.wave-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 200%;
+  animation: wave-slide linear infinite;
+  will-change: transform;
+}
+
+/* ─── GlobalLoader spinner ───────────────────────────────────────── */
+@keyframes til-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.til-spin {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(6, 149, 228, 0.2);
+  border-top-color: #0695E4;
+  border-radius: 50%;
+  animation: til-spin 0.85s linear infinite;
+}
+
+/* ─── Neumorphism + glassmorphism: page components (cards & tables) ─────
+   Applies to every page. */
+.ant-card,
+.ant-table-wrapper .ant-table-container {
+  border-radius: 14px !important;
+  box-shadow:
+    10px 10px 24px rgba(0, 4, 12, 0.55),
+    -8px -8px 22px rgba(70, 150, 220, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+.ant-card-head {
+  border-bottom: 1px solid rgba(6, 149, 228, 0.14) !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+
+
+/* ─── Lista de maniobras: tarjetas en móvil, tabla en escritorio ─────────
+   Ambas versiones se renderizan una sola vez; el CSS decide cuál se ve,
+   así no hace falta un hook de breakpoint. */
+.til-op-list-table { display: none; }
+.til-op-list-cards { display: block; }
+@media (min-width: 768px) {
+  .til-op-list-table { display: block; }
+  .til-op-list-cards { display: none; }
+}
+
+/* ─── Layout de la app (header + contenido) ──────────────────────── */
+.til-op-header { border-bottom: 1px solid rgba(6, 149, 228, 0.2); }
+.til-op-content { padding: 24px; }
+
+@media (min-width: 1100px) {
+  .til-op-header  { border-bottom: none; }
+  .til-op-content { padding: 12px 20px; }
+}
+
+@media (max-width: 575px) {
+  .til-op-content {
+    padding:    10px;
+    margin:     8px !important;
+    min-height: calc(100vh - 80px) !important;
+  }
+  .til-op-operator-name { display: none; }
+}
