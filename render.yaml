@@ -7,7 +7,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://maylob-backend.onrender.com
+        value: https://til-backend.onrender.com/api/v1
     routes:
       # SPA: cualquier ruta devuelve index.html (el router es del cliente).
       - type: rewrite
@@ -17,7 +17,7 @@ services:
     headers:
       - path: /*
         name: Content-Security-Policy
-        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://maylob-backend.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://til-backend.onrender.com/api/v1; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
       - path: /*
         name: Strict-Transport-Security
         value: max-age=63072000; includeSubDomains

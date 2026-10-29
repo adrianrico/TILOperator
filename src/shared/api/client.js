@@ -6,12 +6,12 @@ import { TOKEN_STORAGE_KEY, OPERATOR_STORAGE_KEY } from '../lib/storage'
  * La URL base viene de `VITE_API_URL` (ver `.env.example`).
  */
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'https://maylob-backend.onrender.com',
+  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api/v1',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 })
 
-/** Adjunta el JWT del operador (`Authorization: Bearer`) emitido por `/auth/login`. */
+/** Adjunta el JWT del operador (`Authorization: Bearer`) emitido por `/operator-auth/login`. */
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(TOKEN_STORAGE_KEY)
   if (token) {
@@ -22,13 +22,13 @@ api.interceptors.request.use((config) => {
 
 /**
  * Token vencido o inválido: se limpia la sesión y se vuelve al login.
- * El login mismo (`/auth/login`) se excluye para no recargar al fallar una CURP.
+ * El login mismo (`/operator-auth/login`) se excluye para no recargar al fallar una CURP.
  */
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     const url = error.config?.url ?? ''
-    if (error.response?.status === 401 && !url.includes('/auth/login')) {
+    if (error.response?.status === 401 && !url.includes('/operator-auth/login')) {
       localStorage.removeItem(TOKEN_STORAGE_KEY)
       localStorage.removeItem(OPERATOR_STORAGE_KEY)
       window.location.assign('/login')

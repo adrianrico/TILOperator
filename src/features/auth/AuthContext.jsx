@@ -24,8 +24,8 @@ export function AuthProvider({ children }) {
   /** Valida la CURP en el backend y persiste la sesión. Lanza si el backend rechaza. */
   async function login(curp) {
     const res = await authService.login(curp)
-    const data = res.data?.operator
-    localStorage.setItem(TOKEN_STORAGE_KEY, res.data.token)
+    const { accessToken, operator: data } = res.data.data
+    localStorage.setItem(TOKEN_STORAGE_KEY, accessToken)
     localStorage.setItem(OPERATOR_STORAGE_KEY, JSON.stringify(data))
     setOperator(data)
     return data

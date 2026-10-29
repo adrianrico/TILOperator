@@ -4,17 +4,19 @@ const CURP = 'GORA900101HDFXXX01'
 
 test.describe('Login', () => {
   test('CURP válido inicia sesión y navega a la lista de maniobras', async ({ page }) => {
-    await page.route('**/auth/login', async (route) => {
+    await page.route('**/operator-auth/login', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
-          code: '1',
-          operator: {
-            operator_id: CURP,
-            operator_name: 'JUAN OPERADOR',
-            transporter_id: 'TR001',
-            transporter_name: 'TRANSPORTES DEMO',
+          data: {
+            accessToken: 'test-token',
+            operator: {
+              operator_id: CURP,
+              operator_name: 'JUAN OPERADOR',
+              transporter_id: 'TR001',
+              transporter_name: 'TRANSPORTES DEMO',
+            },
           },
         }),
       })
@@ -37,11 +39,11 @@ test.describe('Login', () => {
   })
 
   test('CURP inválido muestra error y no navega', async ({ page }) => {
-    await page.route('**/auth/login', async (route) => {
+    await page.route('**/operator-auth/login', async (route) => {
       await route.fulfill({
-        status: 404,
+        status: 401,
         contentType: 'application/json',
-        body: JSON.stringify({ code: '-1', message: 'CURP no encontrado.' }),
+        body: JSON.stringify({ error: { code: 'INVALID_CREDENTIALS', message: 'CURP no encontrado.' } }),
       })
     })
 

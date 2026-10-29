@@ -47,7 +47,7 @@ Regla de dependencias: `app → features → shared`. Un feature puede importar 
 
 ## Sesión
 
-No hay token: el operador se identifica con su CURP (`POST /auth/login`), que se guarda en `localStorage` y se envía en el header `X-Operator-Curp` en cada request.
+No hay token: el operador se identifica con su CURP (`POST /operator-auth/login` de TIL_Backend), que devuelve un JWT; se guarda en `localStorage` y se envía como `Authorization: Bearer` en cada request.
 
 ## Documentación de aprendizaje
 
